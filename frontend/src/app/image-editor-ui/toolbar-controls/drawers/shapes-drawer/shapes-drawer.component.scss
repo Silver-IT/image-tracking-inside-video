@@ -1,0 +1,58 @@
+@import "../../../../../scss/variables";
+
+shapes-drawer {
+  display: block;
+
+  .content.stickers-visible {
+    justify-content: flex-start;
+  }
+
+  .button-with-image > svg path {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 25;
+  }
+
+  .basic-shape {
+    margin: 0 10px;
+    cursor: pointer;
+
+    .preview {
+      background-color: mat-color($app-accent, default);
+      height: 50px;
+    }
+
+    .rectangle {
+      width: 50px;
+    }
+
+    .circle {
+      width: 50px;
+      border-radius: 50%;
+    }
+
+    .triangle {
+      width: 50px;
+      background-color: transparent;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 33px solid mat-color($app-accent, default);
+    }
+
+    .ellipse {
+      width: 80px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+
+  .stickers-drawer {
+    .content-wrapper > .shapes {
+      justify-content: initial;
+    }
+  }
+
+  .shape:first-of-type {
+    margin-left: 0;
+  }
+}

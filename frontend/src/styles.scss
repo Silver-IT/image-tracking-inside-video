@@ -1,0 +1,44 @@
+@import "variables";
+@import "material-theme";
+
+pixie-editor {
+  @import "common/scss/buttons";
+  @import "common/scss/input";
+  @import "common/scss/modal";
+  @import "common/scss/perfect-scrollbar-theme";
+  @import "scss/floating-panel";
+  @import "scss/overlay-mode";
+  @import "scss/compact-mode";
+  @import "scss/controls-drawer";
+  @import "common/scss/utils";
+  @import "scss/webkit-scrollbar";
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+}
+
+pixie-editor, image-editor {
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+pixie-editor {
+  touch-action: manipulation;
+}
+
+image-editor {
+  font-family: $font-family;
+  color: mat-color($app-foreground, text);
+  line-height: 1.42857143;
+  font-size: 14px;
+  overflow: hidden;
+}

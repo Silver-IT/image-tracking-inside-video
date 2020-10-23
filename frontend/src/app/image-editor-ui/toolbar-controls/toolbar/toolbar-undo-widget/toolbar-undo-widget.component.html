@@ -1,0 +1,6 @@
+<button mat-icon-button [disabled]="!(canUndo$ | async)" (click)="history.undo()" [class.invisible]="config.get('pixie.ui.toolbar.hideHistoryButtons')">
+   <mat-icon svgIcon="undo"></mat-icon>
+</button>
+<button mat-icon-button [disabled]="!(canRedo$ | async)" (click)="history.redo()" [class.invisible]="config.get('pixie.ui.toolbar.hideHistoryButtons')">
+   <mat-icon svgIcon="redo"></mat-icon>
+</button>

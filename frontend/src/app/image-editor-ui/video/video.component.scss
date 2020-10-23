@@ -1,0 +1,22 @@
+pixie-video-background {
+    .video-background-wrapper {
+        position: absolute;
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        .video-spinner {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: flex;
+            background-color: rgba(0, 0, 0, 0.35);
+
+            span {
+                margin: auto;
+                font-size: 32px;
+            }
+        }
+    }
+}

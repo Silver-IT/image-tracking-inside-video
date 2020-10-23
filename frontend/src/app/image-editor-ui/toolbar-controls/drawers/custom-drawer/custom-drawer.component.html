@@ -1,0 +1,6 @@
+<div class="tool-panel-content">
+    <button class="button-with-image" *ngFor="let item of items" (click)="item.action($event)">
+        <image-or-icon [src]="item.thumbnail"></image-or-icon>
+        <span class="name bottom-label" trans>{{item.name}}</span>
+    </button>
+</div>

@@ -1,0 +1,52 @@
+@import "../../../../../scss/variables";
+
+text-drawer {
+  display: block;
+
+  .font-selector-wrapper {
+    margin-left: 25px;
+  }
+
+  text-font-selector {
+    line-height: 48px;
+    margin-bottom: 10px;
+  }
+
+  .add-text-button-wrapper {
+    margin: 0 25px;
+  }
+
+  @media only screen and (max-width: 700px) {
+    overflow: hidden;
+
+    &.controls-drawer {
+      .tool-panel-content {
+        flex-wrap: wrap;
+      }
+
+      .font-selector-wrapper {
+        margin-left: auto;
+      }
+
+      .bottom-label {
+        display: none;
+      }
+
+      .add-text-button-wrapper {
+        margin-top: 10px;
+      }
+
+      .add-text-button {
+        background-color: mat-color($app-accent, default);
+        color: mat-color($app-accent, default-contrast);
+        border: none;
+        @include mat-elevation(2);
+        margin-bottom: 3px;
+      }
+
+      text-font-selector {
+        margin-left: 0;
+      }
+    }
+  }
+}

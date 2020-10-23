@@ -1,0 +1,23 @@
+<ng-container *ngIf="selectedFilter$ | async as selectedFilter">
+    <ng-container *ngFor="let config of getFilterOptions(selectedFilter) | keyvalue">
+        <ng-container *ngIf="config.value.type === 'colorPicker'">
+            <color-widget [formControl]="colorFormControl" (ngModelChange)="applyFilterValue('color', $event)"></color-widget>
+        </ng-container>
+        <div class="input-container" *ngIf="config.value.type === 'select'">
+            <label [for]="config.key" trans>{{config.key}}</label>
+            <select [id]="config.key" (change)="applyFilterValue(config.key, $event.target.value)">
+                <option [value]="value" *ngFor="let value of config.value.available" trans>{{value}}</option>
+            </select>
+        </div>
+        <div class="slider-container" *ngIf="config.value.type === 'slider'">
+            <div class="slider-label" trans>{{config.key}}</div>
+            <mat-slider
+                    [value]="config.value.current"
+                    [min]="config.value.min || 0"
+                    [max]="config.value.max || 100"
+                    [step]="config.value.step || 1"
+                    (input)="applyFilterValue(config.key, $event.value)"
+            ></mat-slider>
+        </div>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,15 @@
+<ng-container [formGroup]="activeObject.form">
+    <mat-button-toggle-group formControlName="textAlign" aria-label="Text Align" class="text-align-group">
+        <mat-button-toggle value="left"><mat-icon svgIcon="format-align-left"></mat-icon></mat-button-toggle>
+        <mat-button-toggle value="center"><mat-icon svgIcon="format-align-center"></mat-icon></mat-button-toggle>
+        <mat-button-toggle value="right"><mat-icon svgIcon="format-align-right"></mat-icon></mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-button-toggle-group aria-label="Text Style" [multiple]="true" (change)="setTextStyle($event)">
+        <mat-button-toggle [checked]="activeObject.form.get('underline').value" value="underline"><mat-icon svgIcon="format-underlined"></mat-icon></mat-button-toggle>
+        <mat-button-toggle [checked]="activeObject.form.get('linethrough').value" value="linethrough"><mat-icon svgIcon="format-strikethrough"></mat-icon></mat-button-toggle>
+        <mat-button-toggle [checked]="activeObject.form.get('fontStyle').value === 'italic'" value="italic"><mat-icon svgIcon="format-italic"></mat-icon></mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <text-font-selector formControlName="fontFamily"></text-font-selector>
+</ng-container>

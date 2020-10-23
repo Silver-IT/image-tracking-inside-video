@@ -1,0 +1,26 @@
+@import "../../../../../scss/variables";
+
+filter-drawer {
+  &.controls-drawer .filter-list {
+    justify-content: flex-start;
+  }
+
+  .button-with-image {
+    position: relative;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    img {
+      border-radius: 4px;
+      width: 65px;
+      height: 65px;
+    }
+
+    .bottom-label {
+      margin-top: 3px;
+      font-size: 11px;
+    }
+  }
+}

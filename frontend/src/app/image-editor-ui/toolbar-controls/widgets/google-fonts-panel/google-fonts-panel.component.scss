@@ -1,0 +1,58 @@
+@import "../../../../../scss/variables";
+
+google-fonts-panel {
+  display: block;
+  width: 320px;
+  max-height: 90vh;
+  background-color: #fff; // fix ie11 css vars issue
+  background-color: mat-color($app-background, card);
+  @include mat-elevation(1);
+  border-radius: 4px;
+  color: mat-color($app-foreground, text);
+  overflow: auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: mat-color($app-accent, default-contrast);
+    border-bottom: 1px solid mat-color($app-foreground, divider);
+    background-color: mat-color($app-primary, default);
+
+    .close-button {
+      margin-left: auto;
+    }
+  }
+
+  .many-inputs {
+    padding: 10px;
+
+    .input-container {
+      width: auto;
+
+      input {
+        background-color: mat-color($app-background, card);
+        border-color: mat-color($app-foreground, divider);
+      }
+    }
+  }
+
+  .fonts {
+    text-align: center;
+    padding: 10px 0;
+
+    .font {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 10px;
+      width: 100%;
+      transition: color 0.2s ease;
+      text-align: center;
+      line-height: 45px;
+
+      &:hover {
+        color: mat-color($app-accent, default);
+      }
+    }
+  }
+}

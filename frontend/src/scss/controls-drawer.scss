@@ -1,0 +1,51 @@
+@import "_variables";
+
+.drawer-wrapper {
+  overflow: auto;
+  margin: 0 10px;
+}
+
+.tool-panel-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 30px;
+
+  .controls-drawer {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+  }
+
+  .tool-panel-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    user-select: none;
+    position: relative;
+
+    & > :first-child {
+      margin-left: auto;
+    }
+
+    & > :last-child {
+      margin-right: auto;
+    }
+  }
+
+  .cancel-button, .apply-button {
+    width: 75px;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media only screen and (max-width: $compact-mode-breakpoint) {
+    padding: 0;
+
+    .cancel-button, .apply-button {
+      display: none;
+    }
+  }
+}

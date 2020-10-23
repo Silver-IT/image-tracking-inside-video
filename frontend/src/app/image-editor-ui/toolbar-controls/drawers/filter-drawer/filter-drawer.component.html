@@ -1,0 +1,19 @@
+<div class="tool-panel-content filter-list" *ngIf="activeFilters$ | async as activeFilters" [class.hidden]="selectedFilter$ | async">
+    <div class="button-with-image" *ngFor="let filter of filterList" (click)="applyFilter(filter)">
+        <div class="image-container">
+            <img [src]="getFilterImage(filter)" alt="Filter preview">
+            <div class="button-overlay" *ngIf="activeFilters.indexOf(filter) > -1">
+                <button mat-icon-button (click)="removeFilter(filter); $event.stopPropagation();">
+                    <mat-icon svgIcon="cancel"></mat-icon>
+                </button>
+                <button mat-icon-button (click)="showFilterControls(filter); $event.stopPropagation();" *ngIf="filterTool.hasOptions(filter)">
+                    <mat-icon svgIcon="settings"></mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="bottom-label" trans>{{getFilterDisplayName(filter)}}</div>
+    </div>
+</div>
+
+<filter-controls *ngIf="selectedFilter$ | async as selectedFilter" class="tool-panel-content" [ngClass]="selectedFilter"></filter-controls>
+

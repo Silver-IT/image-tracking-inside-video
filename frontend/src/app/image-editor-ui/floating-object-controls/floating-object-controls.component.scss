@@ -1,0 +1,55 @@
+@import "../../../scss/_variables";
+
+$height: 40px;
+$padding: 5px;
+$heightWithPadding: $height + ($padding * 2);
+
+floating-object-controls {
+  display: none;
+  position: absolute;
+  bottom: -($heightWithPadding + 10px);
+  height: $heightWithPadding;
+  left: 10px;
+  right: 10px;
+  padding: $padding;
+  max-width: 210px;
+  background-color: #fff; // fix ie11 css vars issue
+  background-color: mat-color($app-background, card);
+  @include mat-elevation(1);
+  border-radius: 2px;
+
+  &.visible, &.mobile-mode {
+    display: flex;
+  }
+
+  .left {
+    flex: 1 1 auto;
+    text-align: left;
+  }
+
+  .right {
+    flex: 0 0 100px;
+    text-align: right;
+  }
+
+  &.mobile-mode {
+    top: -($height + 10);
+    height: $height;
+    bottom: 0;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    max-width: none;
+
+    .mat-icon-button {
+      background-color: mat-color($app-background, card);
+      border-radius: 3px;
+      margin: 0 3px;
+      @include mat-elevation(1);
+
+      .mat-button-ripple {
+        border-radius: 3px;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@common/*": [
+                "common/*"
+            ]
+        },
+        "importHelpers": true,
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2015",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2017",
+            "dom"
+        ]
+    },
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
+    }
+}

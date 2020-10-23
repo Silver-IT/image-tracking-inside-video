@@ -1,0 +1,15 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  text-transform: capitalize;
+}
+
+.current {
+  margin: 0 8px;
+}
+
+.value {
+  text-align: center;
+}

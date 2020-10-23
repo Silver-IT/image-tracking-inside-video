@@ -1,0 +1,68 @@
+<aside class="admin-pill-nav">
+    <div class="new-localization">
+        <button mat-button (click)="showCrupdateLocalizationModal()" *ngIf="currentUser.hasPermission('localizations.create')">
+            <mat-icon svgIcon="add"></mat-icon>
+            <span trans>New Localization</span>
+        </button>
+    </div>
+
+    <ng-container *ngIf="breakpoints.isMobile$ | async; else desktopNav">
+        <button [matMenuTriggerFor]="navMenu" class="no-style admin-pill-nav-mobile-selector">
+            <span class="name" trans>{{(selectedLocalization).model.name}}</span>
+            <mat-icon svgIcon="keyboard-arrow-down"></mat-icon>
+        </button>
+        <mat-menu #navMenu="matMenu" class="admin-pill-nav-menu">
+            <button mat-menu-item *ngFor="let localization of localizations$ | async" (click)="setSelectedLocalization(localization)" [class.selected]="selectedLocalization.model.id == localization.model.id">{{localization.model.name}}</button>
+        </mat-menu>
+    </ng-container>
+
+    <ng-template #desktopNav>
+        <div class="nav-item" *ngFor="let localization of localizations$ | async" (click)="setSelectedLocalization(localization)" [class.selected]="selectedLocalization.model.id == localization.model.id">
+            <div class="name">{{localization.model.name.replace('-', ' ')}}</div>
+
+            <div class="actions">
+                <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="actionsMenu" ><mat-icon svgIcon="settings" class="size-22"></mat-icon></button>
+                <mat-menu #actionsMenu>
+                    <div mat-menu-item (click)="setDefaultLocalization(localization)" *ngIf="currentUser.hasPermission('settings.update')" trans>Set as Default</div>
+                    <div mat-menu-item (click)="showCrupdateLocalizationModal(localization)" *ngIf="localization.name !== 'English' && currentUser.hasPermission('localizations.update')" trans>Update</div>
+                    <div mat-menu-item (click)="confirmLocalizationDeletion(localization)" *ngIf="localization.name !== 'English' && currentUser.hasPermission('localizations.delete')" trans>Delete</div>
+                </mat-menu>
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="update-translations">
+        <button mat-raised-button color="accent" (click)="updateLocalization()" [disabled]="loading$ | async" *ngIf="currentUser.hasPermission('localizations.update')" trans>Update</button>
+    </div>
+</aside>
+
+<section class="material-panel">
+    <div class="panel-header">
+        <button mat-raised-button class="new-translation-button" color="accent" (click)="addLine()" trans>Add New Translation</button>
+        <div class="input-container search-input-container">
+            <input type="text" class="search" placeholder="Search Translations" trans-placeholder [formControl]="searchQuery">
+            <mat-icon svgIcon="search"></mat-icon>
+        </div>
+    </div>
+    <mat-table [dataSource]="tableDataSource" class="responsive-material-table">
+        <ng-container matColumnDef="sourceText">
+            <mat-header-cell *matHeaderCellDef trans>Source Text</mat-header-cell>
+            <mat-cell *matCellDef="let line" class="source-text-column" data-label="Source:">
+                <button type="button" class="remove-line-button" mat-icon-button color="warn" (click)="removeLine(line)" [matTooltip]="'Remove' | trans">
+                    <mat-icon svgIcon="delete"></mat-icon>
+                </button>
+                <span>{{line.key}}</span>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="translation">
+            <mat-header-cell *matHeaderCellDef trans>Translation</mat-header-cell>
+            <mat-cell *matCellDef="let line" data-label="Translation:">
+                <input type="text" class="translation-input" id="{{line.key}}" [(ngModel)]="selectedLocalization.lines[line.key]">
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['sourceText', 'translation']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['sourceText', 'translation']"></mat-row>
+    </mat-table>
+</section>

@@ -1,0 +1,13 @@
+<div class="colors">
+    <button class="color-picker-button" mat-icon-button (click)="openColorPicker()" #colorPickerButton>
+        <mat-icon svgIcon="color-wheel-custom"></mat-icon>
+    </button>
+    <button
+            class="no-style color control"
+            (click)="changeColor(color)"
+            *ngFor="let color of colors"
+            [style.background]="color"
+            [class.selected]="(selectedColor$ | async) === color"
+    ></button>
+</div>
+<div class="bottom-label" trans><ng-content></ng-content></div>

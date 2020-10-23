@@ -1,0 +1,11 @@
+<button mat-icon-button (click)="zoom.zoomOut()"
+        [disabled]="!config.get('pixie.tools.zoom.disableMinimumZoom') && !zoom.canZoomOut()">
+    <mat-icon svgIcon="remove"></mat-icon>
+</button>
+<div class="current">
+    <div trans>Zoom</div>
+    <div class="value">{{zoom$ | async}}%</div>
+</div>
+<button mat-icon-button (click)="zoom.zoomIn()" [disabled]="!zoom.canZoomIn()">
+    <mat-icon svgIcon="add"></mat-icon>
+</button>

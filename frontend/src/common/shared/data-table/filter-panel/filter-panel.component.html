@@ -1,0 +1,33 @@
+<header>
+    <mat-icon svgIcon="filter-list"></mat-icon>
+    <span trans>Filters</span>
+</header>
+
+<form [formGroup]="data.source.filterForm" class="many-inputs">
+    <ng-container *ngFor="let filter of data.source.config.filters">
+        <div class="input-container" *ngIf="conditionPasses(filter.condition)">
+            <div [ngSwitch]="filter.type">
+                <ng-container *ngSwitchCase="'date'">
+                    <between-input [formControlName]="filter.column" [setDefaultDate]="false" [showLabels]="false">{{filter.name}}</between-input>
+                </ng-container>
+                <ng-container *ngSwitchCase="'custom'">
+                    <select-user-input *ngIf="filter.name === 'user'" [formControlName]="filter.column"></select-user-input>
+                    <app-data-table-inputs *ngIf="filter.name !== 'user'" [formGroup]="data.source.filterForm" [filter]="filter"></app-data-table-inputs>
+                </ng-container>
+                <ng-container *ngSwitchCase="'user-select'">
+                    <select-user-input [formControlName]="filter.column"></select-user-input>
+                </ng-container>
+                <ng-container *ngSwitchCase="'select'">
+                    <label [for]="filter.name" trans>{{viewName(filter.name)}}</label>
+                    <select [id]="filter.name" [formControlName]="filter.column">
+                        <option [ngValue]="getValue(option)" *ngFor="let option of filter.options" trans>{{optionName(option)}}</option>
+                    </select>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</form>
+
+<footer>
+    <button (click)="close()" type="button" mat-button color="accent" trans>Close</button>
+</footer>

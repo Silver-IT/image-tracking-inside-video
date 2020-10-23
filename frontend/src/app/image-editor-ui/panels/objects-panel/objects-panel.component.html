@@ -1,0 +1,32 @@
+<div class="header">
+    <div class="name" trans>Objects</div>
+    <!-- <button class="close-button" mat-icon-button (click)="panelRef.close()">
+        <mat-icon svgIcon="close"></mat-icon>
+    </button> -->
+</div>
+<div class="items-list" customScrollbar cdkDropList (cdkDropListDropped)="reorderObjects($event)">
+    <div class="reorder-item-wrapper drag-item"
+        *ngFor="let object of objects.getAll()"
+        cdkDrag
+        [cdkDragData]="object.data.id"
+        cdkDragBoundary=".items-list"
+        cdkDragLockAxis="y"
+        [cdkDragDisabled]="shouldDisableObject(object)">
+
+        <div class="floating-panel-item"
+             (click)="selectObject(object)"
+             [class.disabled]="shouldDisableObject(object)"
+             [class.active]="(activeObjId$ | async) === object.data.id"
+             [attr.data-id]="object.data.id">
+            <mat-icon [svgIcon]="getIcon(object)" class="list-icon"></mat-icon>
+            <div class="name" trans>{{getObjectDisplayName(object)}}</div>
+            <div class="drag-preview" *cdkDragPreview></div>
+            <div class="drag-placeholder" *cdkDragPlaceholder>
+                <div class="placeholder-inner"></div>
+            </div>
+            <div style="flex: auto"></div>
+            <div class="name timeline" trans>{{getTimelineBySeconds(object)}}</div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="tool-panel-content main-content" [class.hidden]="brushControlsOpen$ | async">
+    <color-widget [(ngModel)]="drawTool.currentBrush.color" (ngModelChange)="drawTool.setBrushColor($event)" trans>Brush Color</color-widget>
+
+    <div class="brush-type-button-wrapper">
+        <button mat-icon-button class="round-action-button" [style.color]="drawTool.getBrushColor()" (click)="openBrushControls()">
+            <mat-icon svgIcon="pencil-custom"></mat-icon>
+        </button>
+        <div class="bottom-label" trans>Brush Type</div>
+    </div>
+
+    <div class="brush-sizes brush-controls">
+        <div class="sizes controls">
+            <button
+                    class="no-style size control"
+                    (click)="drawTool.setBrushSize(size)"
+                    *ngFor="let size of brushSizes$ | async"
+                    [ngStyle]="{width: size+'px', height: size+'px'}"
+                    [class.selected]="drawTool.getBrushSize() === size"
+            ></button>
+        </div>
+        <div class="bottom-label" trans>Brush Size</div>
+    </div>
+</div>
+
+<div class="tool-panel-content brush-types-content" [class.hidden]="!(brushControlsOpen$ | async)">
+    <button class="no-style button-with-image" *ngFor="let type of brushTypes$ | async" (click)="setBrushType(type)" [class.selected]="drawTool.getBrushType() == type">
+        <img [src]="getBrushPreviewUrl(type)" alt="{{type}} brush preview">
+    </button>
+</div>

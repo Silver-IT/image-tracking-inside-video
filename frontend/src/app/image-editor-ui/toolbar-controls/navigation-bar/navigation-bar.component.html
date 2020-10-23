@@ -1,0 +1,13 @@
+<div class="scroll-container" customScrollbar [suppressX]="false">
+    <ng-container *ngFor="let item of navItems$ | async">
+        <div class="separator" *ngIf="item.type === 'separator'"></div>
+
+        <button *ngIf="item.type !== 'separator'"
+                class="no-style control-button"
+                (click)="executeNavItemAction(item)"
+                [disabled]="navItemIsDisabled(item)">
+            <image-or-icon class="control-icon inherit-size" [src]="item.icon"></image-or-icon>
+            <span class="name" trans>{{item.display_name || item.name}}</span>
+        </button>
+    </ng-container>
+</div>

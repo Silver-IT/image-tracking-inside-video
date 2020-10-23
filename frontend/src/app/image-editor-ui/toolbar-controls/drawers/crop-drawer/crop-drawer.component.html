@@ -1,0 +1,21 @@
+<div class="tool-panel-content">
+    <div class="aspect-ratios">
+        <div class="custom-ratio-container" *ngIf="!this.config.get('pixie.tools.crop.hideCustomControls')">
+            <div class="inputs">
+                <div class="input-container">
+                    <label for="width" trans>Width</label>
+                    <input type="number" id="width" [(ngModel)]="cropzoneWidth" (ngModelChange)="resizeCropzone()" min="1" [max]="canvasState.original.width">
+                </div>
+
+                <div class="input-container">
+                    <label for="height" trans>Height</label>
+                    <input type="number" id="height" [(ngModel)]="cropzoneHeight" (ngModelChange)="resizeCropzone()" min="1" [max]="canvasState.original.height">
+                </div>
+            </div>
+        </div>
+        <div class="aspect-ratio" *ngFor="let preset of presets" [class.selected]="cropZone.aspectRatio === preset.ratio" (click)="applyAspectRatio(preset.ratio)">
+            <div class="preview" #ratioPreview [attr.data-ratio]="preset.ratio"></div>
+            <div class="name" trans>{{preset.name}}</div>
+        </div>
+    </div>
+</div>

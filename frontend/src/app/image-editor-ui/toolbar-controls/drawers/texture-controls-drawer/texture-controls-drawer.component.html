@@ -1,0 +1,10 @@
+<div class="button-with-image" (click)="openUploadDialog()">
+    <mat-icon svgIcon="add-image-custom"></mat-icon>
+    <div class="bottom-label" trans>Upload</div>
+</div>
+
+<div class="texture button-with-image"
+     *ngFor="let index of defaultTextures"
+     (click)="fillWithPattern(index)">
+    <div class="bg-image" [style.background-image]="getTextureBgStyle(index)"></div>
+</div>

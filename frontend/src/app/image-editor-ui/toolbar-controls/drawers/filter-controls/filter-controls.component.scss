@@ -1,0 +1,11 @@
+@import "../../../../../scss/_variables";
+
+filter-controls {
+  .input-container {
+    max-width: 120px;
+
+    label {
+      display: none;
+    }
+  }
+}

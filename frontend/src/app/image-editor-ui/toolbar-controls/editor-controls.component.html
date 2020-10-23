@@ -1,0 +1,30 @@
+<ng-container *ngIf="activePanel$ | async as activePanel">
+    <navigation-bar *ngIf="activePanel === 'navigation'" @controlsAnimation></navigation-bar>
+
+    <div class="tool-panel-container" [ngSwitch]="activePanel" [class.hidden]="activePanel === 'navigation'">
+        <!-- <button class="cancel-button" mat-raised-button (click)="imageEditor.cancelChanges()" trans>
+            <span trans *ngIf="dirty$ | async; else close">Cancel</span>
+            <ng-template #close><span trans>Close</span></ng-template>
+        </button> -->
+
+        <div class="drawer-wrapper" customScrollbar [suppressX]="false">
+            <filter-drawer *ngSwitchCase="'filter'" @controlsAnimation></filter-drawer>
+            <resize-drawer *ngSwitchCase="'resize'" @controlsAnimation></resize-drawer>
+            <transform-drawer *ngSwitchCase="'transform'" @controlsAnimation></transform-drawer>
+            <crop-drawer *ngSwitchCase="'crop'" @controlsAnimation></crop-drawer>
+            <draw-drawer *ngSwitchCase="'draw'" @controlsAnimation></draw-drawer>
+            <text-drawer *ngSwitchCase="'text'" @controlsAnimation></text-drawer>
+            <shapes-drawer *ngSwitchCase="'shapes'" @controlsAnimation></shapes-drawer>
+            <stickers-drawer *ngSwitchCase="'stickers'" @controlsAnimation></stickers-drawer>
+            <round-drawer *ngSwitchCase="'corners'" @controlsAnimation></round-drawer>
+            <frame-drawer *ngSwitchCase="'frame'" @controlsAnimation></frame-drawer>
+            <canvas-background-drawer *ngSwitchCase="'background'" @controlsAnimation></canvas-background-drawer>
+            <object-settings-drawer *ngSwitchCase="'objectSettings'" @controlsAnimation></object-settings-drawer>
+            <custom-drawer *ngSwitchDefault @controlsAnimation></custom-drawer>
+        </div>
+
+        <button class="apply-button" mat-raised-button color="accent" (click)="imageEditor.applyChanges()" [disabled]="!(dirty$ | async)" trans>Apply</button>
+    </div>
+
+    <floating-object-controls [class.visible]="activeObjId$ | async" [mobileMode]="compactMode$ | async"></floating-object-controls>
+</ng-container>

@@ -1,0 +1,14 @@
+<div class="input-container">
+    <label for="storage_backblaze_application_key" trans>Backblaze Application Key (Master)</label>
+    <input type="text" id="storage_backblaze_application_key" name="storage_backblaze_application_key" [(ngModel)]="state.server['storage_backblaze_application_key']" required>
+</div>
+
+<div class="input-container">
+    <label for="storage_backblaze_account_id" trans>Backblaze Application Key ID (Master)</label>
+    <input type="text" id="storage_backblaze_account_id" name="storage_backblaze_account_id" [(ngModel)]="state.server['storage_backblaze_account_id']" required>
+</div>
+
+<div class="input-container">
+    <label for="storage_backblaze_bucket" trans>Backblaze Bucket Name</label>
+    <input type="text" id="storage_backblaze_bucket" name="storage_backblaze_bucket" [(ngModel)]="state.server['storage_backblaze_bucket']" required>
+</div>

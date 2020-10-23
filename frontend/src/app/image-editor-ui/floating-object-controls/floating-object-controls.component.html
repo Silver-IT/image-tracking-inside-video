@@ -1,0 +1,33 @@
+<div class="left">
+    <ng-container *ngIf="activeObjId$ | async">
+        <button mat-icon-button (click)="activeObject.duplicate()" [matTooltip]="'Duplicate' | trans">
+            <mat-icon svgIcon="copy-custom"></mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="activeObject.flipHorizontal()" [matTooltip]="'Flip' | trans">
+            <mat-icon svgIcon="flip"></mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="bringActiveObjectToFront()" [matTooltip]="'Bring to front' | trans">
+            <mat-icon svgIcon="flip-to-front"></mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="deleteObject()" [matTooltip]="'Delete' | trans">
+            <mat-icon svgIcon="delete-custom"></mat-icon>
+        </button>
+
+
+        <button mat-icon-button (click)="openObjSettingsPanel()" [disabled]="dirty$ | async" [matTooltip]="'Customize' | trans">
+            <mat-icon svgIcon="settings-custom"></mat-icon>
+        </button>
+    </ng-container>
+</div>
+
+<div class="right" *ngIf="mobileMode">
+    <button mat-icon-button [disabled]="!(canUndo$ | async)" (click)="history.undo()">
+        <mat-icon svgIcon="undo"></mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="!(canRedo$ | async)" (click)="history.redo()">
+        <mat-icon svgIcon="redo"></mat-icon>
+    </button>
+</div>

@@ -1,0 +1,39 @@
+<ng-container *ngIf="toolbarMode$ | async as toolbarMode">
+   <ng-container *ngIf="activePanel$ | async as activePanel">
+       <ng-container *ngIf="editorMode$ | async as editorMode">
+           <ng-container *ngIf="toolbarMode === 'compact' && activePanel !== 'navigation'; else regularActions">
+               <div class="left">
+                   <button mat-icon-button (click)="cancelChanges()">
+                       <mat-icon svgIcon="close"></mat-icon>
+                   </button>
+               </div>
+               <div class="center">
+                   <toolbar-panel-name-widget></toolbar-panel-name-widget>
+               </div>
+               <div class="right">
+                   <button mat-icon-button (click)="applyChanges()">
+                       <mat-icon svgIcon="check"></mat-icon>
+                   </button>
+               </div>
+           </ng-container>
+
+           <ng-template #regularActions>
+               <div class="left">
+                   <ng-container *ngFor="let leftItem of items.left">
+                       <toolbar-item [item]="leftItem" [toolbarMode]="toolbarMode" [editorMode]="editorMode"></toolbar-item>
+                   </ng-container>
+               </div>
+               <div class="center">
+                   <ng-container *ngFor="let centerItem of items.center">
+                       <toolbar-item [item]="centerItem" [toolbarMode]="toolbarMode" [editorMode]="editorMode"></toolbar-item>
+                   </ng-container>
+               </div>
+               <div class="right">
+                   <ng-container *ngFor="let rightItem of items.right">
+                       <toolbar-item [item]="rightItem" [toolbarMode]="toolbarMode" [editorMode]="editorMode"></toolbar-item>
+                   </ng-container>
+               </div>
+           </ng-template>
+       </ng-container>
+   </ng-container>
+</ng-container>

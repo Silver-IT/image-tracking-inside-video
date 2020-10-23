@@ -1,0 +1,8 @@
+<ng-container [formGroup]="activeObject.form">
+    <color-widget formControlName="stroke"></color-widget>
+
+    <div class="slider-container">
+        <div class="slider-label" trans>Outline Width</div>
+        <mat-slider min="0" max="20" step="1" formControlName="strokeWidth"></mat-slider>
+    </div>
+</ng-container>

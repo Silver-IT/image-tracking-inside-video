@@ -1,0 +1,43 @@
+.export-panel-dialog-container.be-modal {
+  width: 255px;
+
+  .mat-dialog-container {
+    padding: 18px;
+  }
+}
+
+export-panel {
+  display: block;
+
+  .name-input-container {
+    margin-bottom: 18px;
+  }
+
+  .mat-radio-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  .mat-slider {
+    display: block;
+    width: 100%;
+    margin: 0 -6px;
+  }
+
+  .slider-label {
+    position: relative;
+    bottom: -15px;
+    pointer-events: none;
+  }
+
+  .save-button {
+    margin-top: 15px;
+    display: block;
+    width: 100%;
+  }
+}

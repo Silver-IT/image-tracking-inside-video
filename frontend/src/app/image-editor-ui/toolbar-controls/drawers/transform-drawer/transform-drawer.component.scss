@@ -1,0 +1,41 @@
+@import "../../../../../scss/variables";
+
+transform-drawer {
+  display: block;
+
+  .tool-panel-content {
+    flex-wrap: wrap;
+  }
+
+  .buttons-container {
+    margin: 0 20px;
+  }
+
+  .button-with-image.small {
+    width: 55px;
+    height: 55px;
+
+    mat-icon, img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media only screen and (max-width: $small) {
+    &.controls-drawer .content {
+      justify-content: center;
+
+      > :first-child, > :last-child {
+        margin: 0;
+      }
+    }
+
+    .buttons-container {
+      margin: 0;
+    }
+
+    .mat-slider {
+      display: none;
+    }
+  }
+}

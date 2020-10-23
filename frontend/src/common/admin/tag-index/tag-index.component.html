@@ -1,0 +1,40 @@
+<data-table [dataSource]="dataSource" itemsName="tags" class="responsive-material-table" matSort>
+    <button mat-raised-button color="accent" (click)="showCrupdateTagModal()" *ngIf="currentUser.hasPermission('tags.create')" headerActions trans>Add</button>
+
+    <button mat-icon-button [matTooltip]="'Delete selected' | trans" (click)="maybeDeleteSelectedTags()" headerSelectedActions *ngIf="currentUser.hasPermission('tags.delete')">
+        <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+
+    <!-- name column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Name</mat-header-cell>
+        <mat-cell *matCellDef="let tag" data-label="Name:">{{tag.name}}</mat-cell>
+    </ng-container>
+
+    <!-- type column -->
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Type</mat-header-cell>
+        <mat-cell *matCellDef="let tag" data-label="Type:">{{tag.type}}</mat-cell>
+    </ng-container>
+
+    <!-- display name column -->
+    <ng-container matColumnDef="display_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Display Name</mat-header-cell>
+        <mat-cell *matCellDef="let tag" data-label="Display Name:">{{tag.display_name}}</mat-cell>
+    </ng-container>
+
+    <!-- created_at column -->
+    <ng-container matColumnDef="created_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Created At</mat-header-cell>
+        <mat-cell *matCellDef="let tag" data-label="Created At:">{{tag.created_at ? (tag.created_at | formattedDate) : '-' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let tag">
+            <button mat-icon-button (click)="showCrupdateTagModal(tag)" *ngIf="currentUser.hasPermission('tags.update')" [matTooltip]="'Edit tag' | trans">
+                <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+</data-table>

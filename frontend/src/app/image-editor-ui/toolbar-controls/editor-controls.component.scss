@@ -1,0 +1,154 @@
+@import "../../../scss/_variables";
+
+editor-controls {
+  display: block;
+  z-index: 2;
+  width: 100%;
+  background-color: mat-color($app-background, card);
+  height: 115px;
+  position: relative;
+  @include mat-elevation(1);
+
+  navigation-bar, .drawer {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .bottom-label {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 13px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .button-with-image {
+    text-align: center;
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid mat-color($app-foreground, divider);
+    background-color: mat-color($app-background, card);
+    color: mat-color($app-foreground, text);
+    transition: box-shadow 0.3s ease;
+
+    &.no-label > mat-icon,  &.no-label > img {
+      width: 80px;
+      height: 80px;
+    }
+
+    &:hover {
+      @include mat-elevation(3);
+    }
+
+    .bottom-label {
+      font-size: 12px;
+    }
+
+    img, > svg {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+    }
+
+    .mat-icon {
+      width: 40px;
+      height: 40px;
+      margin: auto;
+    }
+
+    .bg-image {
+      width: 100%;
+      height: 100%;
+    }
+
+    .image-container {
+      width: 100%;
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .button-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: mat-color($app-accent, default);
+      padding-top: 5px;
+
+      mat-icon {
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+      }
+    }
+  }
+
+  .round-action-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid mat-color($app-foreground, divider);
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: auto;
+
+    mat-icon {
+      width: 45px;
+      height: 45px;
+    }
+
+    @media only screen and (max-width: $compact-mode-breakpoint) {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+
+      mat-icon {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+
+  .slider-container {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 30px;
+
+    > .slider-label {
+      text-transform: capitalize;
+      white-space: nowrap;
+      font-size: 13px;
+      margin-right: 10px;
+      padding-left: 8px;
+    }
+
+    > .mat-slider {
+      flex: 1 1 auto;
+    }
+  }
+
+  &.position-bottom floating-object-controls {
+    bottom: 120px;
+  }
+}

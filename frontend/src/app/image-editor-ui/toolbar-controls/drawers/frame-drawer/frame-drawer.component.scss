@@ -1,0 +1,28 @@
+@import "../../../../../scss/variables";
+
+frame-drawer {
+  .button-with-image {
+    position: relative;
+
+    img {
+      border-radius: 4px;
+      width: 65px;
+      height: 65px;
+    }
+
+    .bottom-label {
+      margin-top: 3px;
+      font-size: 11px;
+    }
+  }
+
+  @media only screen and (max-width: $small) {
+    &.controls-drawer .main-content {
+      justify-content: flex-start;
+    }
+
+    .frame-controls {
+      padding: 0 15px;
+    }
+  }
+}

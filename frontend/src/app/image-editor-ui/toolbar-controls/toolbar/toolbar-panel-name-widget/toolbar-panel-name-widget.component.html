@@ -1,0 +1,4 @@
+<ng-container *ngIf="activePanel$ | async as activePanel">
+    <span *ngIf="activePanel !== 'navigation'" trans>{{getToolDisplayName(activePanel)}}</span>
+    <span *ngIf="activePanel === 'navigation'" trans>Editor</span>
+</ng-container>

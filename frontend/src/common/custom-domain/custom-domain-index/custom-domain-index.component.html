@@ -1,0 +1,54 @@
+<data-table [dataSource]="dataSource" itemsName="domains" matSort class="responsive-material-table">
+    <ng-container headerActions>
+        <button mat-raised-button color="accent" (click)="showCrupdateCustomDomainModal()" [disabled]="!currentUser.hasPermission('custom_domains.create')" trans>Add</button>
+    </ng-container>
+
+    <ng-container headerSelectedActions>
+        <button mat-icon-button [matTooltip]="'Delete selected' | trans" (click)="maybeDeleteSelectedDomains()">
+            <mat-icon svgIcon="delete"></mat-icon>
+        </button>
+    </ng-container>
+
+    <no-results-message>
+        <div primary-text trans>No Custom Domains</div>
+        <div secondary-text trans>You have not set up any custom domains. You can set up multiple ones, such as https://yourdomain.com.</div>
+    </no-results-message>
+
+    <ng-container matColumnDef="host">
+        <mat-header-cell *matHeaderCellDef trans>Host</mat-header-cell>
+        <mat-cell *matCellDef="let domain">
+            <img class="favicon-img" [src]="favicon(domain.host)" alt="Domain favicon">
+            <span>{{domain.host}}</span>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container *ngIf="insideAdmin()">
+        <ng-container matColumnDef="user" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header="user_id" trans>User</mat-header-cell>
+            <mat-cell *matCellDef="let domain" data-label="User: ">
+                <ng-container *ngIf="domain.user">
+                    <img [src]="domain.user.avatar">
+                    <span>{{domain.user.display_name}}</span>
+                </ng-container>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="global">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="global" trans>Global</mat-header-cell>
+            <mat-cell *matCellDef="let domain" data-label="Global: " trans>{{domain.global ? 'Yes' : 'No'}}</mat-cell>
+        </ng-container>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Last Updated</mat-header-cell>
+        <mat-cell *matCellDef="let domain" class="hidden-on-mobile">{{domain.updated_at | formattedDate}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let domain">
+            <button mat-icon-button (click)="showCrupdateCustomDomainModal(domain)" [matTooltip]="'Edit domain' | trans">
+                <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+</data-table>

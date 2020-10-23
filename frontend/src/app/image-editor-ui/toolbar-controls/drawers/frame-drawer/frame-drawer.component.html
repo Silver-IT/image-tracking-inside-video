@@ -1,0 +1,25 @@
+<section class="tool-panel-content main-content" [class.hidden]="controlsOpen$ | async">
+    <div class="button-with-image" *ngFor="let frame of frameTool.getAll()" (click)="selectFrame(frame)">
+        <div class="image-container">
+            <img [src]="getFrameThumbUrl(frame)">
+            <div class="button-overlay" *ngIf="frameIsActive(frame)">
+                <button mat-icon-button (click)="removeFrame(); $event.stopPropagation();">
+                    <mat-icon svgIcon="cancel"></mat-icon>
+                </button>
+                <button mat-icon-button (click)="showFrameConfig(frame); $event.stopPropagation();">
+                    <mat-icon svgIcon="settings"></mat-icon>
+                </button>
+            </div>
+        </div>
+        <span class="bottom-label" trans>{{frame.display_name || frame.name}}</span>
+    </div>
+</section>
+
+<section class="tool-panel-content frame-controls" [class.hidden]="!(controlsOpen$ | async)" [formGroup]="frameControlsForm">
+    <color-widget formControlName="color" *ngIf="activeFrame.isBasic()"></color-widget>
+
+    <div class="slider-container">
+        <div class="slider-label" trans>Size</div>
+        <mat-slider [min]="activeFrame.getMinSize()" [max]="activeFrame.getMaxSize()" formControlName="size" (input)="scaleFrame($event.value)"></mat-slider>
+    </div>
+</section>

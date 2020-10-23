@@ -1,0 +1,19 @@
+<form (ngSubmit)="export()" [formGroup]="exportForm"  ngNativeValidate>
+    <div class="input-container name-input-container">
+        <label for="name" trans>File Name</label>
+        <input type="text" id="name" formControlName="name" required>
+    </div>
+
+    <mat-radio-group formControlName="format" required>
+        <mat-radio-button value="jpeg">JPEG</mat-radio-button>
+        <mat-radio-button value="png">PNG</mat-radio-button>
+        <mat-radio-button value="json">JSON</mat-radio-button>
+    </mat-radio-group>
+
+    <div class="input-container">
+        <label for="quality" class="slider-label">{{ 'Quality' | trans }} ({{quality$ | async}})</label>
+        <mat-slider formControlName="quality" id="quality" min="0.1" max="1" step="0.1" required></mat-slider>
+    </div>
+
+    <button mat-raised-button color="accent" class="save-button" trans>Save</button>
+</form>

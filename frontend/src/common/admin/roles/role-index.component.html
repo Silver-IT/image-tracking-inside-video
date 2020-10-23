@@ -1,0 +1,76 @@
+
+<section class="admin-pill-nav">
+    <div class="new-role">
+        <button mat-flat-button color="accent" class="new-role-button" (click)="showCrupdateRoleModal()" *ngIf="currentUser.hasPermission('roles.create')" trans>New Role</button>
+    </div>
+
+    <ng-container *ngIf="breakpoints.isMobile$ | async; else desktopNav">
+        <button [matMenuTriggerFor]="navMenu" class="no-style admin-pill-nav-mobile-selector">
+            <span class="name" trans>{{(selectedRole$ | async).name}}</span>
+            <mat-icon svgIcon="keyboard-arrow-down"></mat-icon>
+        </button>
+        <mat-menu #navMenu="matMenu" class="admin-pill-nav-menu">
+            <button mat-menu-item *ngFor="let role of roles$ | async" (click)="selectRole(role)" [class.selected]="(selectedRole$ | async).id === role.id">{{role.name}}</button>
+        </mat-menu>
+    </ng-container>
+
+    <ng-template #desktopNav>
+        <aside class="admin-pill-nav rounded">
+            <div class="nav-item" *ngFor="let role of roles$ | async" (click)="selectRole(role)" [class.selected]="(selectedRole$ | async).id === role.id">
+                <div class="name" trans>{{role.name}}</div>
+
+                <div class="actions">
+                    <button mat-icon-button [matMenuTriggerFor]="actionsMenu" (click)="$event.stopPropagation()">
+                        <mat-icon svgIcon="settings"></mat-icon>
+                    </button>
+                    <mat-menu #actionsMenu>
+                        <div mat-menu-item (click)="showCrupdateRoleModal(role)" *ngIf="currentUser.hasPermission('roles.update')" trans>Edit</div>
+                        <div mat-menu-item (click)="maybeDeleteRole(role)" *ngIf="currentUser.hasPermission('roles.delete')" trans>Delete</div>
+                    </mat-menu>
+                </div>
+            </div>
+        </aside>
+    </ng-template>
+</section>
+
+<data-table [dataSource]="dataSource" itemsName="users" class="responsive-material-table" matSort>
+    <ng-container headerActions *ngIf="currentUser.hasPermission('roles.update')">
+        <button class="assign-users-button" mat-raised-button color="accent" (click)="showAssignUsersModal()" [disabled]="!canAssignUsers()" trans>Assign Users</button>
+        <button mat-raised-button color="accent" (click)="maybeDetachUsers()" [disabled]="!dataSource.anyRowsSelected()" trans>Unassign Users</button>
+    </ng-container>
+
+    <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef trans>Avatar</mat-header-cell>
+        <mat-cell *matCellDef="let user"> <img [src]="user.avatar"> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Email</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="Email:"> {{user.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="first_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>First Name</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="First Name:"> {{user.first_name ? user.first_name : '-'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Last Name</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="Last Name:"> {{user.last_name ? user.last_name : '-'}} </mat-cell>
+    </ng-container>
+
+    <no-results-message *ngIf="!(selectedRole$ | async).guests && (dataSource.noResults$ | async)">
+        <span primary-text trans>Nothing To Display.</span>
+        <span secondary-text trans>There are no users in this role yet.</span>
+    </no-results-message>
+
+    <no-results-message *ngIf="(selectedRole$ | async).guests">
+        <span primary-text trans>Guests Role</span>
+        <span secondary-text trans>Users can't be assigned to this role.</span>
+    </no-results-message>
+
+    <no-results-message *ngIf="!(selectedRole$ | async)">
+        <span primary-text trans>No role selected</span>
+        <span secondary-text trans>Select a role from the left.</span>
+    </no-results-message>
+</data-table>

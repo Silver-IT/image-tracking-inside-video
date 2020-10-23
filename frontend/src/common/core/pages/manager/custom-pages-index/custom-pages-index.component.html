@@ -1,0 +1,48 @@
+<data-table [dataSource]="dataSource" [itemsName]="config[0].resourceName" class="responsive-material-table" matSort>
+    <a routerLink="new" mat-raised-button color="accent" *ngIf="currentUser.hasPermission('custom_pages.create')" headerActions trans>Add</a>
+
+    <button mat-icon-button [matTooltip]="'Delete selected' | trans" (click)="maybeDeleteSelectedPages()" headerSelectedActions *ngIf="filterByUserId() || currentUser.hasPermission('custom_pages.delete')">
+        <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+
+    <ng-container matColumnDef="slug">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Slug</mat-header-cell>
+        <mat-cell *matCellDef="let page" data-label="slug"><a [href]="getPageUrl(page)" target="_blank">{{page.slug}}</a> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="body">
+        <mat-header-cell *matHeaderCellDef trans>Body</mat-header-cell>
+        <mat-cell *matCellDef="let page">{{page.body}} </mat-cell>
+    </ng-container>
+
+    <ng-container *ngIf="insideAdmin()">
+        <ng-container matColumnDef="user">
+            <mat-header-cell *matHeaderCellDef mat-sort-header="user_id" trans>User</mat-header-cell>
+            <mat-cell *matCellDef="let page" data-label="User: ">
+                <ng-container *ngIf="page.user">
+                    <img [src]="page.user.avatar">
+                    <span>{{page.user.display_name}}</span>
+                </ng-container>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header trans>Type</mat-header-cell>
+            <mat-cell *matCellDef="let page" class="hidden-on-mobile" trans>{{page.type ? viewName(page.type) : 'default'}}</mat-cell>
+        </ng-container>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Last Updated</mat-header-cell>
+        <mat-cell *matCellDef="let page" data-label="Last Updated:">{{page.updated_at | formattedDate}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let page">
+            <a [routerLink]="[page.id, 'edit']" mat-icon-button *ngIf="filterByUserId() || currentUser.hasPermission('custom_pages.update')" [matTooltip]="'Edit page' | trans">
+                <mat-icon svgIcon="edit"></mat-icon>
+            </a>
+        </mat-cell>
+    </ng-container>
+</data-table>

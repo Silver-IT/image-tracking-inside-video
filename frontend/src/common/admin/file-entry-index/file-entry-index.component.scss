@@ -1,0 +1,23 @@
+@import "variables";
+
+.mat-column-owner {
+  img {
+    width: 35px;
+    height: 35px;
+    margin-right: 8px;
+    border-radius: 4px;
+  }
+}
+
+.mat-column-file_name {
+  margin: 0 30px;
+  min-width: 330px;
+}
+
+.mat-column-public, .mat-column-type {
+  max-width: 90px;
+}
+
+.mat-column-file_size {
+  max-width: 140px;
+}

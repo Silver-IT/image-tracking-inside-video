@@ -1,0 +1,40 @@
+@import "variables";
+
+chip-input {
+  display: block;
+  min-height: $input-height;
+
+  .mat-chip-list-wrapper {
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    border: 1px solid mat-color($app-foreground, divider);
+    padding: 6px;
+    line-height: normal;
+    font-size: 1.4rem;
+    font-family: inherit;
+    background-color: inherit;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin: 0;
+  }
+
+  .mat-chip-input {
+    height: 24px; // 46px - (padding + margin)
+    font: inherit;
+    background: 0 0;
+    color: currentColor;
+    border: none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    width: 0;
+    max-width: 100%;
+    vertical-align: bottom;
+    text-align: inherit;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

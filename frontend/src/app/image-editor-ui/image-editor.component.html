@@ -1,0 +1,15 @@
+<!-- <toolbar *ngIf="!(toolbarHidden$ | async)"></toolbar> -->
+
+<editor-controls *ngIf="(navPosition$ | async) === 'top'" class="position-top"></editor-controls>
+
+<div class="canvas-wrapper" #canvasWrapper backgroundImage="images/viewport-bg.png" [fileDropzone]="dropzoneConfig" [disableDropzoneClick]="true" (filesDropped)="onFileDropped($event)">
+    <div class="canvas-mask-wrapper" #canvasMaskWrapper>
+        <div class="bg-wrapper" backgroundImage="images/canvas-bg.png" [@fadeInCanvas]="loadState.canvasVisible">
+            <pixie-video-background *ngIf="!!videoBackgroundURL" [url]="videoBackgroundURL"></pixie-video-background>
+            <canvas id="pixie-canvas"></canvas>
+        </div>
+        <div class="image-loading-message" [@imageLoadingAnimation] *ngIf="loadState.messageVisible">{{loadState.message}}...</div>
+    </div>
+</div>
+
+<editor-controls *ngIf="(navPosition$ | async) === 'bottom'" class="position-bottom"></editor-controls>

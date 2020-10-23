@@ -1,0 +1,5 @@
+<div class="gradient button-with-image no-label"
+     *ngFor="let gradient of defaultGradients; index as index;"
+     (click)="fillWithGradient(index)">
+    <div class="bg-image" [style.background-image]="getGradientBgStyle(index + 1)"></div>
+</div>

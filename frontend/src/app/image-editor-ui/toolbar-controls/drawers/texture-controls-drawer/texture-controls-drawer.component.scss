@@ -1,0 +1,9 @@
+texture-controls-drawer {
+  .texture {
+    margin: 0 5px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}

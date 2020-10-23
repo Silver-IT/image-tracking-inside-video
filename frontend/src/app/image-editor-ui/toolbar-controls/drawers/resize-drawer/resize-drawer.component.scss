@@ -1,0 +1,59 @@
+@import "../../../../../scss/variables";
+
+resize-drawer {
+  display: block;
+
+  .checkbox-container {
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+
+  .mat-checkbox {
+    display: block;
+
+    &:first-of-type {
+      margin-bottom: 8px;
+    }
+  }
+
+  .input-container {
+    display: inline-block;
+    width: auto;
+    margin: 0 15px 0 0;
+    text-align: center;
+
+    label {
+      padding: 0;
+    }
+  }
+
+  input {
+    width: 95px;
+    height: 45px;
+    border-radius: 3px;
+  }
+
+  form {
+    margin: 0;
+  }
+
+  @media only screen and (max-width: $small) {
+    .tool-panel-content {
+      flex-direction: column;
+      justify-content: center;
+
+      > :first-child, > :last-child  {
+        margin: auto;
+      }
+    }
+
+    .input-container .percentages-checkbox {
+      display: none;
+    }
+
+    .input-container > .aspect-ratio-checkbox {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+}
+
+.mat-button:not(.mat-icon-button) .mat-icon {
+  margin-right: 5px;
+}
+
+.toolbar-image {
+  display: inline-block;
+  max-height: 32px;
+  width: auto;
+  vertical-align: middle;
+}

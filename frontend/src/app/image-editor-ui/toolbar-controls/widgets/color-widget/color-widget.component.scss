@@ -1,0 +1,66 @@
+@import "../../../../../scss/variables";
+
+.be-dark-mode {
+  button.color.selected {
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.5), 0 0 0 2px #fff;
+  }
+}
+
+color-widget {
+  display: block;
+  margin: 0 25px;
+
+  .color-picker-button {
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+
+    svg {
+      filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    .mat-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media only screen and (max-width: $small) {
+    .color-picker-button {
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+      margin-right: 10px;
+
+      .mat-icon {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+
+  .colors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 358px;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  button.color {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    border: 1px solid mat-color($app-foreground, divider);
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: box-shadow 125ms ease-out;
+    position: relative;
+    z-index: 2;
+
+    &.selected {
+      @include mat-elevation(5);
+    }
+  }
+}

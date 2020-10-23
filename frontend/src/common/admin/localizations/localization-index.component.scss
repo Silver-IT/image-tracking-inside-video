@@ -1,0 +1,131 @@
+@import "variables";
+
+:host {
+  display: flex;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+}
+
+.search-input-container {
+  margin-left: auto;
+  max-width: 300px;
+  position: relative;
+
+  .mat-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  input {
+    margin-left: 1px;
+  }
+}
+
+.material-panel {
+  flex: 1 1 auto;
+
+  .translation-input {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 40px;
+    border: none;
+    background-color: transparent;
+    padding: 0 10px;
+    margin-left: 1px;
+    color: inherit;
+
+    &:hover, &:focus {
+      outline: mat-color($app-accent, default) auto 1px;
+    }
+  }
+
+  .remove-line-button {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .source-text-column {
+    padding-left: 0;
+  }
+
+  .source-text-column:hover .remove-line-button {
+    pointer-events: initial;
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: $medium) {
+  .update-translations {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid mat-color($app-foreground, divider);
+  }
+
+  .new-localization {
+    border-bottom: 1px solid mat-color($app-foreground, divider);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: $medium) {
+  :host {
+    display: block;
+  }
+  
+  .admin-pill-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid mat-color($app-foreground, divider-lighter);
+    position: relative;
+  }
+
+  .new-localization {
+    margin-bottom: 5px;
+  }
+
+  .update-translations {
+    position: absolute;
+    top: -5px;
+    right: 0;
+  }
+
+  .panel-header {
+    display: block;
+  }
+
+  .new-translation-button {
+    height: 50px;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .search-input-container {
+    margin-bottom: 25px;
+    max-width: 100%;
+
+    input {
+      background-color: mat-color($app-background, card);
+    }
+  }
+
+  .material-panel {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .mat-row {
+    background-color: mat-color($app-background, card);
+  }
+}

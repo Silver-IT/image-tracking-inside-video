@@ -1,0 +1,17 @@
+<button class="round-action-button color-picker-button" mat-icon-button (click)="openColorPicker()" #colorPickerButton>
+    <mat-icon svgIcon="color-wheel-custom"></mat-icon>
+</button>
+<ng-container [formGroup]="activeObject.form.get('shadow')">
+    <div class="slider-container">
+        <div class="slider-label" trans>Blur</div>
+        <mat-slider min="1" max="20" formControlName="blur"></mat-slider>
+    </div>
+    <div class="slider-container">
+        <div class="slider-label" trans>Offset X</div>
+        <mat-slider min="1" max="20" formControlName="offsetX"></mat-slider>
+    </div>
+    <div class="slider-container">
+        <div class="slider-label" trans>Offset Y</div>
+        <mat-slider min="1" max="20" formControlName="offsetY"></mat-slider>
+    </div>
+</ng-container>

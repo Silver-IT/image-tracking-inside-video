@@ -1,0 +1,59 @@
+<div class="tool-panel-content" [class.hidden]="activePanel$ | async">
+    <div class="button-with-image" (click)="openPanel('textStyle')" *ngIf="activeObjIsText$ | async">
+        <mat-icon svgIcon="text-options-custom"></mat-icon>
+        <div class="bottom-label" trans>Text Style</div>
+    </div>
+
+    <div class="button-with-image" (click)="openPanel('color')">
+        <mat-icon svgIcon="color-custom"></mat-icon>
+        <div class="bottom-label" trans>Color</div>
+    </div>
+
+    <div class="button-with-image" (click)="openPanel('shadow')">
+        <mat-icon svgIcon="shadow-custom"></mat-icon>
+        <div class="bottom-label" trans>Shadow</div>
+    </div>
+
+    <ng-container *ngIf="!(activeObjIsSvg$ | async)">
+        <div class="button-with-image" (click)="openPanel('outline')">
+            <mat-icon svgIcon="outline-custom"></mat-icon>
+            <div class="bottom-label" trans>Outline</div>
+        </div>
+
+        <div class="button-with-image" (click)="openPanel('background')" >
+            <mat-icon svgIcon="background-custom"></mat-icon>
+            <div class="bottom-label" trans>Background</div>
+        </div>
+    </ng-container>
+
+    <div class="button-with-image" (click)="openPanel('texture')">
+        <mat-icon svgIcon="texture-custom"></mat-icon>
+        <div class="bottom-label" trans>Texture</div>
+    </div>
+
+    <div class="button-with-image" (click)="openPanel('gradient')" *ngIf="!(activeObjIsSvg$ | async)">
+        <mat-icon svgIcon="gradient-custom"></mat-icon>
+        <div class="bottom-label" trans>Gradient</div>
+    </div>
+
+    <div class="button-with-image" (click)="openPanel('opacity')">
+        <mat-icon svgIcon="opacity-custom"></mat-icon>
+        <div class="bottom-label" trans>Opacity</div>
+    </div>
+
+    <div class="button-with-image" (click)="replaceImage()" *ngIf="activeObjIsImage$ | async">
+        <mat-icon svgIcon="switch-camera"></mat-icon>
+        <div class="bottom-label" trans>Replace</div>
+    </div>
+</div>
+
+<ng-container [ngSwitch]="activePanel$ | async">
+    <text-controls-drawer class="tool-panel-content" *ngSwitchCase="'textStyle'"></text-controls-drawer>
+    <color-controls-drawer class="tool-panel-content" *ngSwitchCase="'color'" controlName="fill" trans>Color</color-controls-drawer>
+    <shadow-controls-drawer class="tool-panel-content" *ngSwitchCase="'shadow'"></shadow-controls-drawer>
+    <outline-controls-drawer class="tool-panel-content" *ngSwitchCase="'outline'"></outline-controls-drawer>
+    <color-controls-drawer class="tool-panel-content" *ngSwitchCase="'background'" controlName="backgroundColor" trans>Background Color</color-controls-drawer>
+    <texture-controls-drawer class="tool-panel-content" *ngSwitchCase="'texture'"></texture-controls-drawer>
+    <gradient-controls-drawer class="tool-panel-content" *ngSwitchCase="'gradient'"></gradient-controls-drawer>
+    <opacity-controls-drawer class="tool-panel-content" *ngSwitchCase="'opacity'"></opacity-controls-drawer>
+</ng-container>

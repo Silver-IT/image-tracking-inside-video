@@ -1,0 +1,66 @@
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="dataSource.loading$ | async"></mat-progress-bar>
+<div class="data-table-panel">
+    <div class="data-table-header" *ngIf="!hideHeader">
+        <div class="header-inner default" [class.hidden]="dataSource.anyRowsSelected() && selectedActions.children.length">
+            <div class="left"><ng-content select="[headerActions]"></ng-content></div>
+
+            <div class="right">
+                <ng-container *ngIf="dataSource.config.filters?.length">
+                    <mat-chip-list aria-label="Active Filters" class="filter-chip-list">
+                        <mat-chip *ngFor="let filter of dataSource.activeFilters$ | async" [removable]="true" [selectable]="false" (removed)="dataSource.removeFilter(filter.column)">
+                            {{filter.name}}
+                            <mat-icon matChipRemove svgIcon="cancel"></mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                    <button (click)="openFiltersPanel()" class="filter-button" [class.active]="filterPanelRef" #filterButton mat-icon-button>
+                        <mat-icon svgIcon="filter-list"></mat-icon>
+                    </button>
+                </ng-container>
+                <ng-content select="[headerFilters]"></ng-content>
+                <div class="input-container">
+                    <input type="text" class="search-input" placeholder="Search {{ itemsName }}" trans-placeholder [formControl]="dataSource.searchControl">
+                    <mat-icon svgIcon="search"></mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-inner selected" [class.hidden]="!dataSource.anyRowsSelected() || !selectedActions.children.length">
+            <div class="left">{{dataSource.selectedRows.selected.length}} <span class="text" trans>{{itemsName}} Selected</span></div>
+            <div class="right" #selectedActions><ng-content select="[headerSelectedActions]"></ng-content></div>
+        </div>
+
+        <ng-content select="[headerContent]"></ng-content>
+    </div>
+
+    <mat-table [dataSource]="dataSource" [class.empty]="dataSource.noResults$ | async" matSort>
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? dataSource.toggleAllRows() : null"
+                              [checked]="dataSource.allRowsSelected()"
+                              [indeterminate]="dataSource.anyRowsSelected() && ! dataSource.allRowsSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? dataSource.selectedRows.toggle(row) : null"
+                              [checked]="dataSource.selectedRows.isSelected(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <ng-content></ng-content>
+
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: columns"></mat-row>
+    </mat-table>
+
+    <ng-container *ngIf="dataSource.noResults$ | async">
+        <div class="no-results-message-container" #noResults><ng-content select="no-results-message"></ng-content></div>
+        <no-results-message *ngIf="!noResults.children.length">
+            <span primary-text trans>Nothing To Display.</span>
+            <span secondary-text trans>Seems like no {{itemsName}} have been created yet.</span>
+        </no-results-message>
+    </ng-container>
+
+    <mat-paginator [class.hidden]="!dataSource.config.dataPaginator" [pageSize]="15" [pageSizeOptions]="[10, 15, 20, 50, 100]"></mat-paginator>
+</div>

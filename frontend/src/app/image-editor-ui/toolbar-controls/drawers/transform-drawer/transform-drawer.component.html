@@ -1,0 +1,23 @@
+<div class="tool-panel-content">
+    <div class="buttons-container">
+        <button class="rotate-button button-with-image small" (click)="rotateLeft()">
+            <mat-icon svgIcon="rotate-left"></mat-icon>
+        </button>
+
+        <button class="rotate-button button-with-image small" (click)="rotateRight()">
+            <mat-icon svgIcon="rotate-right"></mat-icon>
+        </button>
+    </div>
+
+    <div class="buttons-container">
+        <button class="rotate-button button-with-image small" (click)="flipVertical()">
+            <mat-icon svgIcon="flip-vertical-custom"></mat-icon>
+        </button>
+
+        <button class="rotate-button button-with-image small" (click)="flipHorizontal()">
+            <mat-icon svgIcon="flip-horizontal-custom"></mat-icon>
+        </button>
+    </div>
+
+    <mat-slider [min]="0" [max]="360" (input)="skew($event)" (change)="markAsDirty()"></mat-slider>
+</div>

@@ -1,0 +1,15 @@
+pixie-video-controls {
+    height: 40px;
+    width: 100%;
+    .video-controls-wrapper {
+        width: 100%;
+        display: flex;
+        .play-pause-button {
+            width: 60px;
+            height: 30px;
+        }
+        .seek-bar {
+            flex: auto;
+        }
+    }
+}

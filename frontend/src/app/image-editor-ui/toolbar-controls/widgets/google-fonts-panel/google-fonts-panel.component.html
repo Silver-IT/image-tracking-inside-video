@@ -1,0 +1,28 @@
+<div class="header">
+    <div class="name" trans>Font Picker</div>
+    <button class="close-button no-style" (click)="overlayPanelRef.close()">
+        <mat-icon svgIcon="close"></mat-icon>
+    </button>
+</div>
+
+<form class="many-inputs" [formGroup]="fonts.paginator.filters">
+    <div class="input-container search">
+        <input type="search" placeholder="Search..." formControlName="search" trans-placeholder>
+    </div>
+
+    <div class="input-container category">
+        <select formControlName="category">
+            <option [value]="item.key" *ngFor="let item of fontCategories | keyvalue" trans>{{item.value}}</option>
+        </select>
+    </div>
+</form>
+
+<div class="fonts">
+    <button class="no-style font" *ngFor="let font of fonts.paginator.current$ | async" [style.fontFamily]="font.family" (click)="applyFont(font)">{{font.family}}</button>
+</div>
+
+<mat-paginator [length]="fonts.paginator.getTotal()"
+               [pageSize]="10"
+               [hidePageSize]="true"
+               (page)="changePage($event)">
+</mat-paginator>

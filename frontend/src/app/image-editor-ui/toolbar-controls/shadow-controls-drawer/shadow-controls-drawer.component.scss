@@ -1,0 +1,13 @@
+@import "../../../../scss/_variables";
+
+shadow-controls-drawer {
+  padding: 0 20px;
+
+  @media only screen and (max-width: $small) {
+    padding: 0 5px;
+
+    .slider-container {
+      margin: 0 5px;
+    }
+  }
+}

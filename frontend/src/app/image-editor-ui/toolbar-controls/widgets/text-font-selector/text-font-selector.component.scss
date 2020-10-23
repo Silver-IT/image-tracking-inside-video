@@ -1,0 +1,37 @@
+@import "../../../../../scss/variables";
+
+text-font-selector {
+  display: block;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.12); // fix ie11 css vars issue
+  border: 1px solid mat-color($app-foreground, divider);
+  padding: 0 10px;
+  width: 170px;
+  border-radius: 4px;
+
+  button.select-font-button {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    line-height: inherit;
+
+    .text {
+      flex: 1 1 auto;
+      text-align: center;
+      max-width: calc(100% - 24px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mat-icon {
+      flex: 0 0 24px;
+    }
+    
+    svg {
+      display: block;
+    }
+  }
+}

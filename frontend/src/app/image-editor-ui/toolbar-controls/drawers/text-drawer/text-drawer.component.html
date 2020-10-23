@@ -1,0 +1,15 @@
+<div class="tool-panel-content" [formGroup]="activeObject.form">
+    <color-widget formControlName="fill" trans>Color Picker</color-widget>
+
+    <div class="add-text-button-wrapper">
+        <div class="round-action-button add-text-button" (click)="addText()">
+            <mat-icon svgIcon="add"></mat-icon>
+        </div>
+        <div class="bottom-label" trans>Add Text</div>
+    </div>
+
+    <div class="font-selector-wrapper">
+        <text-font-selector formControlName="fontFamily"></text-font-selector>
+        <div class="bottom-label" trans>Font</div>
+    </div>
+</div>

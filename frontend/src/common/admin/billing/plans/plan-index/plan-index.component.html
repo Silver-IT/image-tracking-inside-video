@@ -1,0 +1,59 @@
+<data-table [dataSource]="dataSource" itemsName="plans" matSort class="responsive-material-table">
+    <div headerActions>
+        <button mat-raised-button color="accent" [disabled]="loading$ | async" (click)="showCrupdatePlanModal()" *ngIf="currentUser.hasPermission('plans.create')" trans>Add</button>
+        <button mat-button [disabled]="loading$ | async" (click)="syncPlans()" *ngIf="currentUser.hasPermission('plans.create')" [matTooltip]="'Sync if one of payment gateways was enabled after plan has already been created'" trans>Sync</button>
+    </div>
+
+    <button mat-icon-button [matTooltip]="'Delete selected' | trans" (click)="maybeDeleteSelectedPlans()" *ngIf="currentUser.hasPermission('plans.delete')" headerSelectedActions>
+        <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Name</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Name: "> {{plan.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="parent">
+        <mat-header-cell *matHeaderCellDef trans>Parent Plan</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Parent: "> {{plan.parent ? plan.parent.name : '-'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Amount: "> {{plan.free ? 'Free' : (plan.amount | currency:plan.currency)}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="currency">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Currency</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Currency: "> {{plan.free ? 'Free' : plan.currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="interval">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Interval</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Interval: " trans> {{plan.free ? 'Free' : plan.interval}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="recommended">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Recommended</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Recommended: " trans> {{plan.parent_id ? '-' : (plan.recommended ? 'Yes' : 'No') }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Position</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Position: "> {{plan.parent_id ? '-' : plan.position}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+        <mat-header-cell *matHeaderCellDef trans>Created At</mat-header-cell>
+        <mat-cell *matCellDef="let plan" data-label="Created: "> {{plan.created_at | formattedDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let plan">
+            <button mat-icon-button (click)="showCrupdatePlanModal(plan)" *ngIf="currentUser.hasPermission('plans.update')" [matTooltip]="'Edit plan' | trans">
+                <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+</data-table>

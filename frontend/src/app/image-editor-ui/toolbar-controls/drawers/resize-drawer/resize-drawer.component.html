@@ -1,0 +1,21 @@
+<form class="tool-panel-content" (ngSubmit)="applyChanges()" [formGroup]="resizeForm" ngNativeValidate>
+    <div class="size-inputs-container">
+        <div class="input-container">
+            <label for="width" trans>Width</label>
+            <input class="size-input" type="number" id="width" name="width" formControlName="width" [min]="minWidth()" [max]="maxWidth()" required>
+        </div>
+
+        <div class="input-container">
+            <label for="height" trans>Height</label>
+            <input class="size-input" type="number" id="height" name="height" formControlName="height" [min]="minHeight()" [max]="maxHeight()" required>
+        </div>
+    </div>
+
+    <!--This can't be first or last child, as it will mess up margin: auto positioning-->
+    <button type="submit" class="hidden"></button>
+
+    <div class="checkbox-container">
+        <mat-checkbox class="aspect-ratio-checkbox" formControlName="maintainAspectRatio" trans>Maintain Aspect Ratio</mat-checkbox>
+        <mat-checkbox  class="percentages-checkbox" formControlName="usePercentages" trans>Use Percentages</mat-checkbox>
+    </div>
+</form>

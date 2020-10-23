@@ -1,0 +1,12 @@
+<div class="header">
+    <div class="name" trans>History</div>
+    <button class="close-button" mat-icon-button (click)="panelRef.close()">
+        <mat-icon svgIcon="close"></mat-icon>
+    </button>
+</div>
+<div class="items-list" *ngIf="activeItemId$ | async as itemId" customScrollbar>
+    <div class="floating-panel-item" *ngFor="let item of items$ | async;" (click)="loadHistoryState(item)" [class.active]="item.id === itemId">
+        <mat-icon [svgIcon]="item.icon" class="list-icon"></mat-icon>
+        <div class="name" trans>{{item.name}}</div>
+    </div>
+</div>

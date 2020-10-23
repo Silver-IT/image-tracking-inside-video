@@ -1,0 +1,37 @@
+@import "variables";
+
+:host {
+  display: block;
+  min-width: 250px;
+  background-color: mat-color($app-background, dialog);
+  border-radius: 4px;
+  @include mat-elevation(15);
+}
+
+header {
+  border-bottom: 1px solid mat-color($app-foreground, divider);
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+
+  .mat-icon {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+}
+
+form {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+label, select {
+  text-transform: capitalize;
+}
+
+footer {
+  border-top: 1px solid mat-color($app-foreground, divider);
+  text-align: right;
+  margin-top: 10px;
+  padding: 10px 20px;
+}

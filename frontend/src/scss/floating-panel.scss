@@ -1,0 +1,87 @@
+@import "../scss/variables";
+
+.cdk-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.floating-panel {
+  display: block;
+  min-width: 250px;
+  background-color: mat-color($app-background, card);
+  @include mat-elevation(3);
+  overflow: hidden;
+  user-select: none;
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: mat-color($app-accent, default-contrast);
+    background-color: mat-color($app-primary, default);
+
+    .close-button {
+      margin-left: auto;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .items-list {
+    height: auto;
+    max-height: 300px;
+    user-select: none;
+    padding: 8px 0;
+
+    .reorder-item-wrapper {
+      padding: 5px 10px;
+
+      .floating-panel-item {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.floating-panel-item {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin: 10px;
+  padding: 0 5px;
+  border: 1px solid mat-color($app-foreground, divider);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  text-transform: capitalize;
+
+  &.active {
+    border-color: mat-color($app-accent, default);
+  }
+
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    @include mat-elevation(1);
+  }
+
+  .list-icon {
+    margin-right: 5px;
+  }
+}
+
+&.be-dark-mode .floating-panel-item {
+  background-color: mat-color($app-primary, default);
+}
+
+.floating-panel-container.is-mobile {
+  width: 100%;
+
+  .floating-panel {
+    width: 90%;
+    margin: 0 auto;
+  }
+}

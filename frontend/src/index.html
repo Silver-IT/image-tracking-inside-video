@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pixie - HTML5 Photo Editor</title>
+
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+          name="viewport">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500'
+          rel='stylesheet' type='text/css'>
+
+    <style>
+        body, html {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<pixie-editor>
+    <div class="global-spinner">
+        <style>.global-spinner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }</style>
+        <style>.la-ball-spin-clockwise, .la-ball-spin-clockwise > div {
+            position: relative;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        .la-ball-spin-clockwise {
+            display: block;
+            font-size: 0;
+            color: #1976d2
+        }
+
+        .la-ball-spin-clockwise.la-dark {
+            color: #333
+        }
+
+        .la-ball-spin-clockwise > div {
+            display: inline-block;
+            float: none;
+            background-color: currentColor;
+            border: 0 solid currentColor
+        }
+
+        .la-ball-spin-clockwise {
+            width: 32px;
+            height: 32px
+        }
+
+        .la-ball-spin-clockwise > div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            margin-top: -4px;
+            margin-left: -4px;
+            border-radius: 100%;
+            -webkit-animation: ball-spin-clockwise 1s infinite ease-in-out;
+            -moz-animation: ball-spin-clockwise 1s infinite ease-in-out;
+            -o-animation: ball-spin-clockwise 1s infinite ease-in-out;
+            animation: ball-spin-clockwise 1s infinite ease-in-out
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(1) {
+            top: 5%;
+            left: 50%;
+            -webkit-animation-delay: -.875s;
+            -moz-animation-delay: -.875s;
+            -o-animation-delay: -.875s;
+            animation-delay: -.875s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(2) {
+            top: 18.1801948466%;
+            left: 81.8198051534%;
+            -webkit-animation-delay: -.75s;
+            -moz-animation-delay: -.75s;
+            -o-animation-delay: -.75s;
+            animation-delay: -.75s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(3) {
+            top: 50%;
+            left: 95%;
+            -webkit-animation-delay: -.625s;
+            -moz-animation-delay: -.625s;
+            -o-animation-delay: -.625s;
+            animation-delay: -.625s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(4) {
+            top: 81.8198051534%;
+            left: 81.8198051534%;
+            -webkit-animation-delay: -.5s;
+            -moz-animation-delay: -.5s;
+            -o-animation-delay: -.5s;
+            animation-delay: -.5s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(5) {
+            top: 94.9999999966%;
+            left: 50.0000000005%;
+            -webkit-animation-delay: -.375s;
+            -moz-animation-delay: -.375s;
+            -o-animation-delay: -.375s;
+            animation-delay: -.375s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(6) {
+            top: 81.8198046966%;
+            left: 18.1801949248%;
+            -webkit-animation-delay: -.25s;
+            -moz-animation-delay: -.25s;
+            -o-animation-delay: -.25s;
+            animation-delay: -.25s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(7) {
+            top: 49.9999750815%;
+            left: 5.0000051215%;
+            -webkit-animation-delay: -.125s;
+            -moz-animation-delay: -.125s;
+            -o-animation-delay: -.125s;
+            animation-delay: -.125s
+        }
+
+        .la-ball-spin-clockwise > div:nth-child(8) {
+            top: 18.179464974%;
+            left: 18.1803700518%;
+            -webkit-animation-delay: 0s;
+            -moz-animation-delay: 0s;
+            -o-animation-delay: 0s;
+            animation-delay: 0s
+        }
+
+        .la-ball-spin-clockwise.la-sm {
+            width: 16px;
+            height: 16px
+        }
+
+        .la-ball-spin-clockwise.la-sm > div {
+            width: 4px;
+            height: 4px;
+            margin-top: -2px;
+            margin-left: -2px
+        }
+
+        .la-ball-spin-clockwise.la-2x {
+            width: 64px;
+            height: 64px
+        }
+
+        .la-ball-spin-clockwise.la-2x > div {
+            width: 16px;
+            height: 16px;
+            margin-top: -8px;
+            margin-left: -8px
+        }
+
+        .la-ball-spin-clockwise.la-3x {
+            width: 96px;
+            height: 96px
+        }
+
+        .la-ball-spin-clockwise.la-3x > div {
+            width: 24px;
+            height: 24px;
+            margin-top: -12px;
+            margin-left: -12px
+        }
+
+        @-webkit-keyframes ball-spin-clockwise {
+            0%, 100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1)
+            }
+            20% {
+                opacity: 1
+            }
+            80% {
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0)
+            }
+        }
+
+        @-moz-keyframes ball-spin-clockwise {
+            0%, 100% {
+                opacity: 1;
+                -moz-transform: scale(1);
+                transform: scale(1)
+            }
+            20% {
+                opacity: 1
+            }
+            80% {
+                opacity: 0;
+                -moz-transform: scale(0);
+                transform: scale(0)
+            }
+        }
+
+        @-o-keyframes ball-spin-clockwise {
+            0%, 100% {
+                opacity: 1;
+                -o-transform: scale(1);
+                transform: scale(1)
+            }
+            20% {
+                opacity: 1
+            }
+            80% {
+                opacity: 0;
+                -o-transform: scale(0);
+                transform: scale(0)
+            }
+        }
+
+        @keyframes ball-spin-clockwise {
+            0%, 100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1)
+            }
+            20% {
+                opacity: 1
+            }
+            80% {
+                opacity: 0;
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0)
+            }
+        }</style>
+        <div class="la-ball-spin-clockwise la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <script>setTimeout(function () {
+        document.querySelector('.global-spinner').style.display = 'flex';
+    }, 50);</script>
+</pixie-editor>
+
+<script>
+    var i = setInterval(function () {
+        if (window['Pixie'] == null) return;
+
+        window['Pixie'] = new Pixie({
+            state: 'https://cdn.bottle-up.com/templates/json/205f1471c1e58f56.37339139.json',
+            crossOrigin: true,
+            // baseUrl: 'http://localhost:4200',
+            blankCanvasSize: {
+                width: 800,
+                height: 600,
+            },
+            onLoad: () => {
+                //Pixie.loadStateFromUrl('assets/images/samples/image.json');
+                // Pixie.getTool('controls').openPanel('crop');
+            },
+            onOpen: () => {
+
+            },
+            // onSave: () => {
+            //      console.log('on save');
+            // },
+            objectDefaults: {
+                basicShape: {
+                    fill: 'transparent',
+                    stroke: 'red',
+                    strokeWidth: 2,
+                },
+                text: {
+                    fill: 'rgb(242, 38, 19)',
+                    // fontFamily: 'Pacifico',
+                },
+                drawing: {
+                    fill: 'purple',
+                }
+            },
+            ui: {
+                themes: [
+                    {
+                        name: 'test',
+                        colors: {
+                            '--be-primary-default': '#3F51B5',
+                            '--be-accent-default': 'red',
+                            '--be-accent-lighter': '#AED581',
+                        }
+                    }
+                ],
+                mode: 'inline',
+                // defaultTheme: 'dark',
+                showExportPanel: true,
+                toolbar: {
+
+                },
+                nav: {
+                    position: 'top',
+                    replaceDefault: true,
+                    items: [
+                        {name: 'girar', icon: 'transform-custom', action: 'transform'},
+                        {name: 'cortar', icon: 'crop-custom', action: 'crop'},
+                        {name: 'filtro', icon: 'filter-custom', action: 'filter'},
+                        {name: 'stamp', icon: 'frame-custom', action: function() {
+                                Pixie.get('canvas').state.contentLoadingState$.next({name: 'merge', loading: true});
+                                var resizeTool = Pixie.getTool('resize');
+                                resizeTool.apply(1081,1081);
+                                Pixie.getTool('import').openFile("assets/images/samples/sample1.jpg").then(function(obj) {
+                                    var size = Pixie.getTool('canvas').state.original;
+                                    // obj.set({width: size.width, height: size.height, top: 0, left: 0});
+                                    // resizeTool.apply(1080,1080);
+                                    var mergeTool = Pixie.getTool('merge');
+                                    mergeTool.apply();
+                                });
+                            }
+                        },
+                        {name: 'formas', icon: 'polygon-custom', action: 'shapes'},
+                        {name: 'texto', icon: 'text-box-custom', action: 'text'},
+                        {name: 'label', icon: 'sticker-custom', action: 'stickers'},
+                        {name: 'background', icon: 'background-custom', action: 'background'},
+                        {name: 'mesclar', icon: 'merge-custom', action: 'merge'},
+                    ]
+                },
+                openImageDialog: {
+                    show: true,
+                    replaceDefaultSampleImages: false,
+                    sampleImages: [
+                        {
+                            url: 'images/samples/sample22.jpg',
+                            thumbnail: 'images/samples/sample1_thumbnailq.jpg',
+                        },
+                    ]
+                },
+            },
+            tools: {
+                export: {
+                    defaultFormat: 'jpeg',
+                    defaultQuality: 1,
+                },
+                filter: {
+                    items: ['dither'],
+                },
+                // draw: {
+                //     replaceDefaultBrushTypes: true,
+                //     replaceDefaultBrushSizes: true,
+                //     brushTypes: ['PencilBrush'],
+                //     brushSizes: [50],
+                // },
+                zoom: {
+                    fitImageToScreen: true,
+                    allowUserZoom: true,
+                },
+                import: {
+                    maxFileSize: 52428800,
+                    // replaceDefaultValidExtensions: true,
+                    // validExtensions: ['jpg'],
+                },
+                crop: {
+                    defaultRatio: null,
+                    cropzone: {
+                        //selectable: false,
+                        //hasControls: false,
+                        //hasBorders: false,
+                    }
+                }
+            },
+        });
+        clearInterval(i);
+    }, 50);
+</script>
+</body>
+</html>

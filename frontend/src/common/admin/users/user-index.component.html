@@ -1,0 +1,56 @@
+<data-table [dataSource]="dataSource" itemsName="users" matSort class="responsive-material-table">
+    <button mat-raised-button color="accent" (click)="showCrupdateUserModal()" *ngIf="currentUser.hasPermission('users.create')" headerActions trans>Add</button>
+
+    <button mat-icon-button [matTooltip]="'Delete selected' | trans" (click)="maybeDeleteSelectedUsers()" headerSelectedActions *ngIf="currentUser.hasPermission('users.delete')">
+        <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+
+    <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef trans>Avatar</mat-header-cell>
+        <mat-cell *matCellDef="let user"><img [src]="user.avatar"></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Email</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="Email:">{{user.email}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subscribed" *ngIf="settings.get('billing.enable')">
+        <mat-header-cell *matHeaderCellDef trans>Subscribed</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="Subscribed:">{{user.subscriptions?.length ? 'Yes' : 'No'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roles">
+        <mat-header-cell *matHeaderCellDef trans>Roles</mat-header-cell>
+        <mat-cell *matCellDef="let user" class="hidden-on-mobile">{{makeRolesList(user.roles)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="permissions">
+        <mat-header-cell *matHeaderCellDef trans>Permissions</mat-header-cell>
+        <mat-cell *matCellDef="let user" class="hidden-on-mobile">{{makePermissionsList(user.permissions)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="first_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>First Name</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="First Name:">{{user.first_name || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Last Name</mat-header-cell>
+        <mat-cell *matCellDef="let user" data-label="Last Name:">{{user.last_name || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Created At</mat-header-cell>
+        <mat-cell *matCellDef="let user" class="hidden-on-mobile">{{user.created_at | formattedDate}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let user">
+            <button mat-icon-button (click)="showCrupdateUserModal(user)" *ngIf="currentUser.hasPermission('users.update')" [matTooltip]="'Edit user' | trans">
+                <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+</data-table>

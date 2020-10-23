@@ -1,0 +1,36 @@
+<h2 trans>Open a photo or design to get started.</h2>
+
+<div class="buttons" *ngIf="!(newCanvasFormVisible$ | async); else canvasFormContainer">
+    <button mat-flat-button color="accent" (click)="openUploadDialog()" trans>Open Photo</button>
+    <button mat-stroked-button color="accent" (click)="newCanvasFormVisible$.next(true)" trans>Create New</button>
+</div>
+
+<ng-template #canvasFormContainer>
+    <div class="new-canvas-container">
+        <form class="many-inputs" ngNativeValidate [formGroup]="newCanvasForm" (ngSubmit)="createNewCanvas()">
+            <div class="input-container">
+                <label for="width" trans>Width</label>
+                <input type="number" id="width" min="1" formControlName="width">
+            </div>
+
+            <div class="input-container">
+                <label for="height" trans>Height</label>
+                <input type="number" id="height" min="1" formControlName="height">
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" mat-button (click)="newCanvasFormVisible$.next(false)" trans>Cancel</button>
+                <button type="submit" mat-raised-button color="accent" trans>Create</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<div class="separator" *ngIf="sampleImages.length">
+    <hr>
+    <span class="text" trans>or use a sample</span>
+</div>
+
+<div class="samples" customScrollbar [suppressX]="false">
+    <img [src]="getSampleUrl(image, true)" *ngFor="let image of sampleImages" (click)="openSample(image)">
+</div>

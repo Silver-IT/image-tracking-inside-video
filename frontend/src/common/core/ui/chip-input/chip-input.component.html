@@ -1,0 +1,24 @@
+<mat-chip-list #chipList [selectable]="false">
+    <mat-chip
+        *ngFor="let item of items$ | async; index as i"
+        [selectable]="false"
+        [removable]="true"
+        (removed)="remove(i)"
+    >
+        {{item}}
+        <mat-icon matChipRemove svgIcon="cancel"></mat-icon>
+    </mat-chip>
+    <input [placeholder]="placeholder | trans"
+           #inputEl
+           [type]="type"
+           class="mat-chip-input mat-input-element"
+           [matChipInputFor]="chipList"
+           [matChipInputAddOnBlur]="true"
+           [matAutocomplete]="auto"
+           [matAutocompleteConnectedTo]="{elementRef: el}"
+           [formControl]="formControl"
+           (matChipInputTokenEnd)="addFromChipInput($event.value)" />
+</mat-chip-list>
+<mat-autocomplete class="chip-input-autocomplete-panel" #auto="matAutocomplete" (optionSelected)="addFromAutocomplete($event.option.viewValue)">
+    <mat-option *ngFor="let value of suggestedValues$ | async" [value]="value">{{value}}</mat-option>
+</mat-autocomplete>

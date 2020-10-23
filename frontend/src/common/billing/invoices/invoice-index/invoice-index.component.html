@@ -1,0 +1,39 @@
+<material-navbar [menuPosition]="settings.get('vebto.navbar.defaultPosition')"></material-navbar>
+
+<div class="container">
+    <h1 trans>Your Payment History</h1>
+
+    <div class="material-panel">
+        <mat-table [dataSource]="dataSource$ | async" class="responsive-material-table">
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef trans>Date</mat-header-cell>
+                <mat-cell *matCellDef="let invoice" data-label="Date:">{{invoice.created_at | formattedDate}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <mat-header-cell *matHeaderCellDef trans>Amount</mat-header-cell>
+                <mat-cell *matCellDef="let invoice" data-label="Amount:">{{invoice.subscription.plan.currency_symbol + invoice.subscription.plan.amount}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef trans>Status</mat-header-cell>
+                <mat-cell *matCellDef="let invoice" data-label="Status:" trans>{{invoice.paid ? 'Paid' : 'Pending'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="invoice">
+                <mat-header-cell *matHeaderCellDef trans>Invoice</mat-header-cell>
+                <mat-cell *matCellDef="let invoice" data-label="Invoice:">
+                    <a [href]="getInvoiceUrl(invoice)" target="_blank" trans>View</a>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['date', 'amount', 'status', 'invoice']"></mat-header-row>
+            <mat-row *matRowDef="let myRowData; columns: ['date', 'amount', 'status', 'invoice']"></mat-row>
+        </mat-table>
+
+        <no-results-message *ngIf="!(dataSource$ | async).length && !(loading$ | async)">
+            <span primary-text trans>Nothing To Display.</span>
+            <span secondary-text trans>You do not have any invoices yet.</span>
+        </no-results-message>
+    </div>
+</div>

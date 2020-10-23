@@ -1,0 +1,48 @@
+<data-table [dataSource]="dataSource" itemsName="files" class="responsive-material-table" matSort>
+    <div class="title" headerActions trans>File Entries</div>
+
+    <button mat-icon-button [matTooltip]="'Delete selected' | trans" (click)="maybeDeleteSelectedEntries()" headerSelectedActions *ngIf="currentUser.hasPermission('files.delete')">
+        <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Name</mat-header-cell>
+        <mat-cell *matCellDef="let entry" data-label="Name:"> {{entry.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="file_name">
+        <mat-header-cell *matHeaderCellDef trans>File Name</mat-header-cell>
+        <mat-cell *matCellDef="let entry" class="hidden-on-mobile"> {{entry.file_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Type</mat-header-cell>
+        <mat-cell *matCellDef="let entry" data-label="Type:"> {{entry.type}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="public">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Public</mat-header-cell>
+        <mat-cell *matCellDef="let entry" data-label="Public:" trans> {{entry.public ? 'Yes' : 'No'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="file_size">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Size</mat-header-cell>
+        <mat-cell *matCellDef="let entry" data-label="File Size:"> {{entry.file_size ? (entry.file_size | formattedFileSize) : '-'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="owner">
+        <mat-header-cell *matHeaderCellDef trans>Owner</mat-header-cell>
+        <mat-cell *matCellDef="let entry">
+            <ng-container *ngIf="entry?.users[0]; else noUser">
+                <img [src]="entry.users[0].avatar">
+                <span>{{entry.users[0].display_name}}</span>
+            </ng-container>
+            <ng-template #noUser>-</ng-template>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header trans>Created At</mat-header-cell>
+        <mat-cell *matCellDef="let entry" class="hidden-on-mobile"> {{entry.created_at | formattedDate}} </mat-cell>
+    </ng-container>
+</data-table>

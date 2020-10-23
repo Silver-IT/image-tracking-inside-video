@@ -1,0 +1,7 @@
+<div class="video-background-wrapper">
+    <div *ngIf="bSpinnerVisibility" class="video-spinner">
+        <span>Loading...</span>
+    </div>
+    <video #videoBackground [src]="url" muted preload></video>
+    <pixie-video-controls></pixie-video-controls>
+</div>
